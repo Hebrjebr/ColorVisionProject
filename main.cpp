@@ -10,21 +10,27 @@
 
 #include <iostream>
 #include <string>
+#include <random>
 
 using namespace std;
 
 int main(void)
 {
-    
     // Initialize Variables using an RGB value
     int rgbOne; // value of red
     int rgbTwo; // value of green
     int rgbThree; // value of blue
 
+    int colorEval; // Evaluate different colorblindness types
+    int colorsAssessed = 0; // Number of colors assessed in this session
+
     // This will only serve to have the computer slowly get angry at you.
     int tries = 3;
     
     char accept;
+    char colorAccept;
+    char contAccept;
+
     string chosenColor;
 
     bool isSelected = false;
@@ -52,7 +58,7 @@ int main(void)
                 }
                 else if (accept == 'Y' || accept == 'y') // Use uppercase and lowercase just in...case.
                 {
-                    cout << "Okay, let's try again.\n";
+                    cout << "\nOkay, let's try again.\n";
                     goto find_input; // Return to the start of the loop and try again
                 }
                 else
@@ -60,13 +66,14 @@ int main(void)
                     if (tries > 0) // Program will stop itself if you fail too much.
                     {
                         tries--; 
-                        cout << "Did you perhaps miss your input? It's okay.\n";
+                        cout << "\nDid you perhaps miss your input? It's okay.\n";
                         cout << "I will restart for you, but just for the future, enter Y or N to reselect your options. Case does not matter at all." << endl;
+                        cout << "I'm giving you " << tries << " tries. No pressure." << endl;
                         goto find_input;
                     }
                     else // You have angered my program. It will now forcefully shut itself down.
                     {
-                        cout << "Do not try to be funny here. I am a program designed to help shed light on colorblindness and help those in need." << endl;
+                        cout << "\nDo not try to be funny here. I am a program designed to help shed light on colorblindness and help those in need." << endl;
                         cout << "Please do not ask me if 9 + 10 = 21 next. I am not for that purpose. Ask ChatGPT for that." << endl;
                         cout << "Goodbye." << endl;
                         goto ending; // You have angered my code. It no like you anymore :(
@@ -83,58 +90,137 @@ int main(void)
 
     // Second section: Discering certain color combinations
     discern_Color:
-        // Find basic colors (black and white)
-        if (rgbOne == 0 && rgbTwo == 0 && rgbThree == 0) // Return Black
+        if (rgbOne == 0 && rgbTwo == 0 && rgbThree == 0) // Black
         {
             chosenColor = "Black";
         }
-        else if (rgbOne == 255 && rgbTwo == 255 && rgbThree == 255) // Return White
+        
+        else if (rgbOne == 255 && rgbTwo == 255 && rgbThree == 255) // White
         {
             chosenColor = "White";
         }
-        else if (rgbOne <= 255 && rgbTwo == 0 && rgbThree == 0) // Values of Red
+
+        else if (rgbOne == rgbTwo && rgbOne == rgbThree && rgbTwo == rgbThree) // Grey
         {
-            if (rgbOne < 128)
-            {
-                chosenColor = "Dark Red";
-            }
-            else if (rgbOne >= 128)
-            {
-                chosenColor = "Red";
-            }
+            chosenColor = "Grey";
         }
-        else if (rgbOne == 0 && rgbTwo <= 255 && rgbThree == 0) // Values of Green
+
+        // Color Bases
+        else if (rgbOne > rgbTwo && rgbOne > rgbThree) // Mostly Red
         {
-            if (rgbTwo < 128)
-            {
-                chosenColor = "Dark Green";
-            }
-            else if (rgbTwo >= 128)
-            {
-                chosenColor = "Green";
-            }
+            chosenColor = "Mostly Red";
         }
-        else if (rgbOne == 0 && rgbTwo == 0 && rgbThree <= 255) // Values of Blue
+        else if (rgbTwo > rgbOne && rgbTwo > rgbThree) // Mostly Green
         {
-            if (rgbThree < 128)
-            {
-                chosenColor = "Dark Blue";
-            }
-            else if (rgbThree >= 128)
-            {
-                chosenColor = "Blue";
-            }
+            chosenColor = "Mostly Green";
         }
-        else 
+        else if (rgbThree > rgbOne && rgbTwo > rgbThree) // Mostly Blue
         {
-            if (rgbOne == rgbTwo && rgbTwo == rgbThree && rgbOne == rgbThree)
-            {
-                chosenColor = "Grey";
-            }   
+            chosenColor = "Mostly Blue";
         }
-        // Print chosen color
-        cout << "Success! Your chosen color is: " << chosenColor << "!" << endl;
+        else if (rgbOne == rgbTwo && rgbOne > rgbThree && rgbTwo > rgbThree)
+        {
+            chosenColor = "More Red and Green than Blue";
+        }
+        else if (rgbTwo == rgbThree && rgbTwo > rgbOne && rgbThree > rgbOne)
+        {
+            chosenColor = "More Blue and Green than Red";
+        }
+        else
+        {
+            chosenColor = "A combination of Red, Green, and Blue";
+        }
+
+        // print output
+        cout << "Success! Looks like your chosen color is " << chosenColor << "." << endl;
+        if (chosenColor == "Black" || chosenColor == "Grey" || chosenColor == "White") // These are colors everyone can see
+        {
+            cout << "This color can be perceived by all people, regardless of colorblindness." << endl; 
+            cout << "There is no need to look for alternatives, nor variations.";
+        }
+        else
+        {
+            cout << "This is a color that can be perceived differently by people with colorblindness." << endl;   
+        }
+        cout << "Would you like to see which types will perceive your color differently? (Y/N) ";
+        cin >> colorAccept;
+        if (colorAccept == 'y' || colorAccept == 'Y') // User wants to see the colors
+            {
+                cout << "Okay! Here's the types that will see it different: " << endl;
+            }
+            else if (colorAccept == 'n' || colorAccept == 'N') // User does not want to see the colors
+            {
+                cout << "Sounds good to me!" << endl;
+                goto ending;
+            }
+            else // Minor Spelling Mistake. I win.
+            {
+                cout << "Too bad, minor spelling mistake. I'm showing you anyway." << endl;
+            }
+        // Go to next section
+        goto suggest_Color;
+    suggest_Color:
+        // Ask which colorblindness they would like to see
+        cout << "There are multiple types of colorblindness a person can have. I can evaluate your chosen color based on different types of colorblindness.";
+        cout << "I am able to evaluate seven of them: " << endl;
+        cout << "1. Deuteranomaly (Green-Weak)\n2. Protanomaly (Red-Weak)\n3. Tritanomaly (Blue-Weak)\n4. Deuteranopia (Green-Blind)\n5. Protanopia (Red-Blind)\n6. Tritanopia (Blue-Blind)\n7. Monochromacy (True Colorblindness)" << endl; 
+        cout << "Enter a value from 1-7 to evaluate your color based on different blindness types: ";
+        cin >> colorEval;
+        goto color_Evaluator;
+
+    // For different color combinations, show user the types of colorblindness and if they can be perceived
+    color_Evaluator:
+        switch (colorEval)
+        {
+            case 1:
+                cout << "You have chosen: Deuteranomaly" << endl;
+                break;
+            case 2:
+                cout << "You have chosen: Protanomaly" << endl;
+                break;
+            case 3:
+                cout << "You have chosen: Tritanomaly" << endl;
+                break;
+            case 4:
+                cout << "You have chosen: Deuteranopia" << endl;
+                break;
+            case 5:
+                cout << "You have chosen: Protanopia" << endl;
+                break;
+            case 6:
+                cout << "You have chosen: Tritanopia" << endl;
+                break;
+            case 7:
+                cout << "You have chosen: Monochromacy" << endl;
+                break;
+            default: // If you decide to mess around with the program, it will choose an option for you
+                cout << "Invalid Entry. Generating random number..." << endl;
+                colorEval = rand() % 8;
+                goto color_Evaluator;
+        }
 
     ending:
+        colorsAssessed++; // Add 1 colors assessed
+        cout << "Thank you for assessing colors! You have assessed a total of " << colorsAssessed << " colors today!" << endl;
+        cout << "Would you like to continue assessing colors? (Y/N) ";
+        cin >> contAccept;
+        if (contAccept == 'y' || contAccept == 'Y') // User continues assessing colors
+            {
+                cout << "Okay! Let's continue assessing colors!" << endl;
+                goto find_input;
+            }
+            else if (contAccept == 'n' || contAccept == 'N')
+            {
+                // User quits program
+                cout << "Okay, I'll see you around!" << endl;
+            } 
+            else // User can't spell
+            {
+                cout << "Please stop patronizing me." << endl;
+                cout << "I'll take that as you want to quit, so I'll take my leave." << endl;
+                cout << "Goodbye. Please tell me you aren't like this with other programs." << endl;
+            }
         return 0;
 }
+    
+    
