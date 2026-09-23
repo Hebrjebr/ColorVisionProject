@@ -22,14 +22,12 @@ int main(void)
     int rgbThree; // value of blue
 
     int colorEval; // Evaluate different colorblindness types
-    int colorsAssessed = 0; // Number of colors assessed in this session
 
     // This will only serve to have the computer slowly get angry at you.
     int tries = 3;
     
     char accept;
     char colorAccept;
-    char contAccept;
 
     string chosenColor;
 
@@ -136,7 +134,8 @@ int main(void)
         if (chosenColor == "Black" || chosenColor == "Grey" || chosenColor == "White") // These are colors everyone can see
         {
             cout << "This color can be perceived by all people, regardless of colorblindness." << endl; 
-            cout << "There is no need to look for alternatives, nor variations.";
+            cout << "There is no need to look for alternatives, nor variations." << endl;
+            goto ending;
         }
         else
         {
@@ -146,7 +145,7 @@ int main(void)
         cin >> colorAccept;
         if (colorAccept == 'y' || colorAccept == 'Y') // User wants to see the colors
             {
-                cout << "Okay! Here's the types that will see it different: " << endl;
+                goto suggest_Color;
             }
             else if (colorAccept == 'n' || colorAccept == 'N') // User does not want to see the colors
             {
@@ -174,53 +173,161 @@ int main(void)
         {
             case 1:
                 cout << "You have chosen: Deuteranomaly" << endl;
+                goto deuteranomaly;
                 break;
             case 2:
                 cout << "You have chosen: Protanomaly" << endl;
+                goto protanomaly;
                 break;
             case 3:
                 cout << "You have chosen: Tritanomaly" << endl;
+                goto tritanomaly;
                 break;
             case 4:
                 cout << "You have chosen: Deuteranopia" << endl;
+                goto deuteranopia;
                 break;
             case 5:
                 cout << "You have chosen: Protanopia" << endl;
+                goto protanopia;
                 break;
             case 6:
                 cout << "You have chosen: Tritanopia" << endl;
+                goto tritanopia;
                 break;
             case 7:
                 cout << "You have chosen: Monochromacy" << endl;
+                goto monochromacy;
                 break;
             default: // If you decide to mess around with the program, it will choose an option for you
                 cout << "Invalid Entry. Generating random number..." << endl;
                 colorEval = rand() % 8;
                 goto color_Evaluator;
         }
-
+    
+    deuteranomaly: // Inform the user about Green-Weak Colorblindness
+        cout << "Deuteranomaly is the most common form of colorblindness, found in about 5% of people." << endl;
+        cout << "It causes Reds, Greens, and Yellows to appear similar." << endl;
+        cout << "Many people live with mild deuteranomaly, causing vivid autumn leaves to appear slightly dulled, or shades of green and orange to blend into one another." << endl;
+        if (chosenColor == "Mostly Red" || chosenColor == "Mostly Green" || chosenColor == "More Red and Green than Blue")
+        {
+            cout << "Your color may pose a problem with those with Deuteranomaly." << endl;
+            cout << "It will cause your color to look a stark yellow or tan." << endl;
+            cout << "Consider adding more blue to your color, or toning down the red and/or green." << endl;
+        }
+        else if (chosenColor == "Mostly Blue" || chosenColor == "More Blue and Green than Red")
+        {
+            cout << "Your color can be perceived okay by those with Deuteranomaly." << endl;
+        }
+        else
+        {
+            cout << "This is a color that may have trouble being seen by most people with colorblindness." << endl;
+        }
+        goto ending;
+    protanomaly: // Inform the user about Red-Weak Colorblindness
+        cout << "Protoanomaly is another common form of colorblindness, seen in 1.03% of people." << endl;
+        cout << "Reds appear darker and duller, with oranges and yellows looking very similar to them." << endl;
+        cout << "Because it dims the reds in our daily lives, red lights, brakes, and danger text can be hard to spot." << endl;
+        if (chosenColor == "Mostly Red" || chosenColor == "Mostly Green" || chosenColor == "More Red and Green than Blue")
+        {
+            cout << "Your color may pose a problem with those with Protoanomaly." << endl;
+            cout << "It will cause your color to be dimmed in their eyes." << endl;
+            cout << "Create more contrast in your color. Make the color a little bit more orange, and avoid making the reds and greens too similar." << endl;
+        }
+        else if (chosenColor == "Mostly Blue" || chosenColor == "More Blue and Green than Red")
+        {
+            cout << "Your color can be perceived okay by those with Protoanomaly." << endl;
+        }
+        else
+        {
+            cout << "This is a color that may have trouble being seen by most people with colorblindness." << endl;
+        }
+        goto ending;
+    tritanomaly: // Inform the user about Blue-Weak Colorblindness
+        cout << "Tritanomaly is a rare case of colorblindness, only held by 0.001% of people." << endl;
+        cout << "Commonly known as blue-yellow colorblindness, it causes blues and greens to blend together, and yellows to look pinkish." << endl;
+        if (chosenColor == "Mostly Red" || chosenColor == "Mostly Green" || chosenColor == "More Red and Green than Blue")
+        {
+            cout << "Your color can be perceived okay by those with Tritanomaly." << endl;
+            cout << "However, be aware of greens. People with Tritanomaly can perceive them as a more blue-ish tint." << endl;
+        }
+        else if (chosenColor == "Mostly Blue" || chosenColor == "More Blue and Green than Red")
+        {
+            cout << "Your color may pose a problem with those with Tritanomaly." << endl;
+            cout << "This color may blend with other colors and cause a bit of confusion." << endl;
+            cout << "Up the contrast in the color, shift the hue a bit so it's able to be perceived better." << endl;
+        }
+        else
+        {
+            cout << "This is a color that may have trouble being seen by most people with colorblindness." << endl;
+        }
+        goto ending;
+    deuteranopia: // Inform the user about Green Colorblindness
+        cout << "Deuteranopia is a harsher form of Deuteranomaly. Rather than it being hard to perceive green, people with deuteranopia can't perceive green at all." << endl;
+        cout << "Seen in about 1% of people, Deuteranopia causes greens to be turned into shades of brownish-yellow." << endl;
+        cout << "A bright red and green strawberry will look like a strange mix of yellows. Oh no!" << endl;
+        if (chosenColor == "Mostly Red" || chosenColor == "Mostly Green" || chosenColor == "More Red and Green than Blue")
+        {
+            cout << "Your color may pose a problem with those with Deuteranopia." << endl;
+            cout << "It will cause your color to look a muted brownish-yellow." << endl;
+            cout << "Lower the saturation of your color so it can be seen by people with Deuteranopia." << endl;
+        }
+        else if (chosenColor == "Mostly Blue" || chosenColor == "More Blue and Green than Red")
+        {
+            cout << "Your color can be perceived okay by those with Deuteranopia." << endl;
+            cout << "However, if it contains hints of reds and greens, it will cause the color to blend in. Blues and Purples appear similar in their vision." << endl;
+        }
+        else
+        {
+            cout << "This is a color that may have trouble being seen by most people with colorblindness." << endl;
+        }
+        goto ending;
+    protanopia: // Inform the user about Red Colorblindness
+        cout << "Protanopia is a more extreme version of Protanomaly. Rather than it being hard to perceive red, people with protanopia can't perceive red at all." << endl;
+        cout << "Seen in about 1% of people, Protanopia makes it hard for people to differntiate reds, greens, and everything in between." << endl;
+        cout << "Moreover, it causes the reds to appear VERY dark, making it hard for people to drive since they can't perceive the red lights on the traffic signal." << endl;
+        if (chosenColor == "Mostly Red" || chosenColor == "Mostly Green" || chosenColor == "More Red and Green than Blue")
+        {
+            cout << "Your color may pose a problem with those with Protoanopia." << endl;
+            cout << "It will cause your color to appear very black or muted." << endl;
+            cout << "Create more contrast in your color. Make the color a little bit more orange, and avoid making the reds and greens too similar." << endl;
+        }
+        else if (chosenColor == "Mostly Blue" || chosenColor == "More Blue and Green than Red")
+        {
+            cout << "Your color can be perceived okay by those with Protanopia." << endl;
+        }
+        else
+        {
+            cout << "This is a color that may have trouble being seen by most people with colorblindness." << endl;
+        }
+        goto ending;
+    tritanopia: // Inform the user about Blue Colorblindness
+        cout << "Tritanopia is a very rare form of colorblindness, only present in about 1 in 30,000 people." << endl;
+        cout << "People lose the ability to differentiate blues and greens, and yellows will always appear and light pink or grey." << endl;
+        cout << "Purple in particular is a problem; it looks like a dark-brown." << endl;
+        if (chosenColor == "Mostly Red" || chosenColor == "Mostly Green" || chosenColor == "More Red and Green than Blue")
+        {
+            cout << "Your color can be perceived okay by those with Tritanopia." << endl;
+        }
+        else if (chosenColor == "Mostly Blue" || chosenColor == "More Blue and Green than Red")
+        {
+            cout << "Your color may pose a problem with those with Tritoanopia." << endl;
+            cout << "The blues in the color cannot be perceived very well, causing confusion." << endl;
+            cout << "Avoid using so much blue in your color to avoid confusion. Some alternatives may be hard to find, but I know you can do it!" << endl;
+        }
+        else
+        {
+            cout << "This is a color that may have trouble being seen by most people with colorblindness." << endl;
+        }
+        goto ending;
+    monochromacy: // I cannot see color my life a silent movie now
+        cout << "Monochromacy is the rarest form of colorblindness. It has quite a few forms." << endl;
+        cout << "Some people can only see reds, greens, blues, or no color at all! This is known as Achromatopsia." << endl;
+        cout << "Unfortunately, unless your color is a form of black or white, your color cannot be perceived at all by these people." << endl;
+        cout << "However, the chances of finding them are very rare, with only 1 in every 50,000 people having it." << endl;
+        cout << "So it's okay that your color is not perceived well." << endl;
+        goto ending;
     ending:
-        colorsAssessed++; // Add 1 colors assessed
-        cout << "Thank you for assessing colors! You have assessed a total of " << colorsAssessed << " colors today!" << endl;
-        cout << "Would you like to continue assessing colors? (Y/N) ";
-        cin >> contAccept;
-        if (contAccept == 'y' || contAccept == 'Y') // User continues assessing colors
-            {
-                cout << "Okay! Let's continue assessing colors!" << endl;
-                goto find_input;
-            }
-            else if (contAccept == 'n' || contAccept == 'N')
-            {
-                // User quits program
-                cout << "Okay, I'll see you around!" << endl;
-            } 
-            else // User can't spell
-            {
-                cout << "Please stop patronizing me." << endl;
-                cout << "I'll take that as you want to quit, so I'll take my leave." << endl;
-                cout << "Goodbye. Please tell me you aren't like this with other programs." << endl;
-            }
+        cout << "Thank you for assessing colors today! I'll see you later!" << endl;
         return 0;
 }
-    
-    
