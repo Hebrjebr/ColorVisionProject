@@ -37,7 +37,7 @@ int main(void)
         while (isSelected == false)
         {
             // Get Input
-            cout << "Enter three numbers (Red/Green/Blue) from a range of 0 to 255: " << endl;
+            cout << "Enter three numbers (Red/Green/Blue) from a range of 0 to 255. Press Enter after each value: " << endl;
             cin >> rgbOne;
             cin >> rgbTwo;
             cin >> rgbThree;
@@ -61,20 +61,18 @@ int main(void)
                 }
                 else
                 {
-                    if (tries > 0) // Program will stop itself if you fail too much.
+                    if (tries > 1) // Program will stop itself if you fail too much.
                     {
                         tries--; 
                         cout << "\nDid you perhaps miss your input? It's okay.\n";
                         cout << "I will restart for you, but just for the future, enter Y or N to reselect your options. Case does not matter at all." << endl;
-                        cout << "I'm giving you " << tries << " tries. No pressure." << endl;
                         goto find_input;
                     }
                     else // You have angered my program. It will now forcefully shut itself down.
                     {
                         cout << "\nDo not try to be funny here. I am a program designed to help shed light on colorblindness and help those in need." << endl;
                         cout << "Please do not ask me if 9 + 10 = 21 next. I am not for that purpose. Ask ChatGPT for that." << endl;
-                        cout << "Goodbye." << endl;
-                        goto ending; // You have angered my code. It no like you anymore :(
+                        goto bad_Ending; // You have angered my code. It no like you anymore :(
                     }
                     
                 }
@@ -172,27 +170,27 @@ int main(void)
         switch (colorEval)
         {
             case 1:
-                cout << "You have chosen: Deuteranomaly" << endl;
+                cout << "\nYou have chosen: Deuteranomaly" << endl;
                 goto deuteranomaly;
                 break;
             case 2:
-                cout << "You have chosen: Protanomaly" << endl;
+                cout << "\nYou have chosen: Protanomaly" << endl;
                 goto protanomaly;
                 break;
             case 3:
-                cout << "You have chosen: Tritanomaly" << endl;
+                cout << "\nYou have chosen: Tritanomaly" << endl;
                 goto tritanomaly;
                 break;
             case 4:
-                cout << "You have chosen: Deuteranopia" << endl;
+                cout << "\nYou have chosen: Deuteranopia" << endl;
                 goto deuteranopia;
                 break;
             case 5:
-                cout << "You have chosen: Protanopia" << endl;
+                cout << "\nYou have chosen: Protanopia" << endl;
                 goto protanopia;
                 break;
             case 6:
-                cout << "You have chosen: Tritanopia" << endl;
+                cout << "\nYou have chosen: Tritanopia" << endl;
                 goto tritanopia;
                 break;
             case 7:
@@ -201,7 +199,7 @@ int main(void)
                 break;
             default: // If you decide to mess around with the program, it will choose an option for you
                 cout << "Invalid Entry. Generating random number..." << endl;
-                colorEval = rand() % 8;
+                colorEval = rand() % 7 + 1; // Randomize a number between 1 and 7
                 goto color_Evaluator;
         }
     
@@ -329,5 +327,8 @@ int main(void)
         goto ending;
     ending:
         cout << "Thank you for assessing colors today! I'll see you later!" << endl;
-        return 0;
+
+    bad_Ending:
+        cout << "Goodbye.";
+    return 0;
 }
