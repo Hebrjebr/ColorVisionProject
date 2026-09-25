@@ -327,8 +327,11 @@ int main(void)
         goto ending;
     ending:
         cout << "Thank you for assessing colors today! I'll see you later!" << endl;
+        goto finish:
 
     bad_Ending:
         cout << "Goodbye.";
-    return 0;
+    
+    finish:
+      return 0;
 }
