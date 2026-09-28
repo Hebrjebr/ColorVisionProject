@@ -61,7 +61,7 @@ int main(void)
                 }
                 else
                 {
-                    if (tries > 1) // Program will stop itself if you fail too much.
+                    if (tries > 0) // Program will stop itself if you fail too much.
                     {
                         tries--; 
                         cout << "\nDid you perhaps miss your input? It's okay.\n";
