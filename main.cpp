@@ -27,6 +27,8 @@ int main(void)
   vector <int> colorOne; // Store values of color one
   vector <int> colorTwo; // Store values of color two
 
+  char evaluate;
+
   // Begin asking for input
   cout << "Welcome to the Fantastically Useful Color Komparator!" << endl;
   cout << "This is a program that can accept two different colors, and then compare them to help users that may have colorblindness.\n" << endl;
@@ -41,8 +43,18 @@ int main(void)
     {
       case 1: // Color Add
         numberAdd(colorOne);
-        cout << "\nAll three values added! We'll need another color in order to compare the two.\n";
+        cout << "\nAll three values added! We'll need another color in order to begin comparing them.\n";
         numberAdd(colorTwo);
+        cout << "\nTwo colors added! Would you like to evaluate them (Y/N)? ";
+        cin >> evaluate;
+        if ((evaluate == 'Y') || (evaluate == 'y'))
+        {
+          // run evaluation
+        }
+        else
+        {
+          cout << "\nUnderstood!\n";
+        }
         break; 
       case 2: // View Information
         Information();
