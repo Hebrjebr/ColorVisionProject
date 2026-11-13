@@ -1,0 +1,6 @@
+You can enter values from 0 to 255. These are the values that are valid in RGB values.
+Anything outside of this range is considered invalid, and will not be considered in the final calculations.
+You can continue to enter values outside of the range until you enter three valid numbers.
+
+Words and letters do not work as well, as it does not know how to translate it. Please be mindful of that
+as you continue to use this program. Thank you.

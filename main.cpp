@@ -1,5 +1,5 @@
 // Author: Ian Phurchpean
-// Date: 4 September 2026
+// Date: 15 November 2026
 
 // OBJECTIVE
 // With a palette of colors given, evaluate if the color can be seen and differentiated.
@@ -16,19 +16,65 @@
 
 using namespace std;
 
-int compareColors(vector <int> colorOne, vector <int> colorTwo);
-bool findColor(vector <int> evaluatedColor);
-void cBlindness (int colorPrompt);
+int numberAdd(vector<int> &color);
+void Information();
 
 int main(void)
 {
+  int mainMenu = 0;
+  bool isDone = false;
+
   vector <int> colorOne; // Store values of color one
   vector <int> colorTwo; // Store values of color two
 
-  int colorEval; // Evaluate different colorblindness types
+  // Begin asking for input
+  cout << "Welcome to the Fantastically Useful Color Komparator!" << endl;
+  cout << "This is a program that can accept two different colors, and then compare them to help users that may have colorblindness.\n" << endl;
 
-  // This will only serve to have the computer slowly get angry at you.
-  int tries = 3;
-    
+  while (!isDone)
+  {
+    cout << "Please enter a number from 1 to 3 to browse different options:" << endl;
+    cout << "1: Enter colors\n2: View Information\n3: Show Bingus\n4: Quit Program\n";
+    cout << "Enter Here: ";
+    cin >> mainMenu;
+    switch (mainMenu)
+    {
+      case 1: // Color Add
+        numberAdd(colorOne);
+        cout << "\nAll three values added! We'll need another color in order to compare the two.\n";
+        numberAdd(colorTwo);
+        break; 
+      case 2: // View Information
+        Information();
+        break;
+      case 3: // Show Bingus
+      {
+        string bingus;
+        fstream file("bingus", ios::in);
+        if (!file.is_open())
+        {
+          cerr << "Could not open file!" << endl;
+        }
+        else
+        {
+          while (getline(file, bingus))
+          {
+            cout << bingus << endl;
+          }
+        }
+      file.close();
+      cout << "\nBingus.\n\n";
+      break;
+      }
+      case 4: 
+        cout << "Have a great rest of your day!" << endl;
+        isDone = true;
+        return 0;
+        break;
+      default: // Default to Color Add
+        mainMenu = 1;
+        break;
+    }
+  }
   return 0;
 }
