@@ -1,0 +1,33 @@
+Colorblindness comes in different types, and it causes certain colors to appear differently to
+different people. A color you may see just fine may be hard to see for other people.
+
+Deuteranomaly is the most common form of colorblindness, found in about 5% of people.
+It causes Reds, Greens, and Yellows to appear similar.
+Many people live with mild deuteranomaly, causing vivid autumn leaves to appear slightly dulled, 
+or shades of green and orange to blend into one another.
+
+Protoanomaly is another common form of colorblindness, seen in 1.03% of people.
+Reds appear darker and duller, with oranges and yellows looking very similar to them.
+Because it dims the reds in our daily lives, red lights, brakes, and danger text can be hard to spot.
+
+Tritanomaly is a rare case of colorblindness, only held by 0.001% of people.
+Commonly known as blue-yellow colorblindness, it causes blues and greens to blend together, 
+and yellows to look pinkish.
+
+Deuteranopia is a harsher form of Deuteranomaly. Rather than it being hard to perceive green, 
+people with deuteranopia can't perceive green at all.
+Seen in about 1% of people, Deuteranopia causes greens to be turned into shades of brownish-yellow.
+
+Protanopia is a more extreme version of Protanomaly. Rather than it being hard to perceive red, 
+people with protanopia can't perceive red at all.
+Seen in about 1% of people, Protanopia makes it hard for people to differntiate 
+reds, greens, and everything in between.
+
+Tritanopia is a very rare form of colorblindness, only present in about 1 in 30,000 people.
+People lose the ability to differentiate blues and greens, and yellows will always appear and light pink or grey.
+
+Monochromacy is the rarest form of colorblindness. It has quite a few forms.
+Some people can only see reds, greens, blues, or no color at all! This is known as Achromatopsia.
+
+This program is able to discern all seven of the colorblindness types listed above.
+
