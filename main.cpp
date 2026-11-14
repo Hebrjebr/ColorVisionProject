@@ -12,17 +12,21 @@
 #include <string>
 #include <vector>
 #include <fstream>
-#include <random>
 
 using namespace std;
 
 int numberAdd(vector<int> &color);
 void Information();
+string colorEval(vector<int> color);
+void Evaluator(int evalChoice, string chosenColor);
 
 int main(void)
 {
   int mainMenu = 0;
   bool isDone = false;
+  int evaluatorChoice = 0;
+
+  string nameOne, nameTwo;
 
   vector <int> colorOne; // Store values of color one
   vector <int> colorTwo; // Store values of color two
@@ -35,7 +39,7 @@ int main(void)
 
   while (!isDone)
   {
-    cout << "Please enter a number from 1 to 3 to browse different options:" << endl;
+    cout << "Please enter a number from 1 to 4 to browse different options:" << endl;
     cout << "1: Enter colors\n2: View Information\n3: Show Bingus\n4: Quit Program\n";
     cout << "Enter Here: ";
     cin >> mainMenu;
@@ -48,13 +52,29 @@ int main(void)
         cout << "\nTwo colors added! Would you like to evaluate them (Y/N)? ";
         cin >> evaluate;
         if ((evaluate == 'Y') || (evaluate == 'y'))
-        {
-          // run evaluation
+        { 
+          // Run Evaluations
+          nameOne = colorEval(colorOne);
+          nameTwo = colorEval(colorTwo);
+          cout << "\nIt looks like your first color is: " << nameOne << endl;
+          cout << "And your second color is: " << nameTwo << endl << endl;
+          cout << "There are multiple types of colorblindness a person can have. I can evaluate your chosen color based on different types of colorblindness.";
+          cout << "I am able to evaluate seven of them: " << endl;
+          cout << "1. Deuteranomaly (Green-Weak)\n2. Protanomaly (Red-Weak)\n3. Tritanomaly (Blue-Weak)\n4. Deuteranopia (Green-Blind)\n5. Protanopia (Red-Blind)\n6. Tritanopia (Blue-Blind)\n7. Monochromacy (True Colorblindness)" << endl;
+          
+          cout << "Enter a value between 1-7 to make your choice: ";
+          cin >> evaluatorChoice;
+          cout << "\nCOLOR ONE:" << endl;
+          Evaluator(evaluatorChoice, nameOne);
+          cout << "\nCOLOR TWO: " << endl;
+          Evaluator(evaluatorChoice, nameTwo);
         }
         else
         {
           cout << "\nUnderstood!\n";
+          cout << "I will see you later!\n";
         }
+        isDone = true;
         break; 
       case 2: // View Information
         Information();
