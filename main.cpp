@@ -86,6 +86,7 @@ int main(void)
         if (!file.is_open())
         {
           cerr << "Could not open file!" << endl;
+          return 1;
         }
         else
         {
